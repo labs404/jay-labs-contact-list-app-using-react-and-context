@@ -81,3 +81,7 @@
     width: 20px;
     color: #444444;
 }
+.contact-modify-container button {
+    border: none;
+    background-color: transparent;
+}
