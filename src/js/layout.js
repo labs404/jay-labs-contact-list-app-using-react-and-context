@@ -33,6 +33,7 @@ const Layout = () => {
 						{/* jay added this line below (manually type address into browser..) */}
 						<Route path="/addcontact" element={<AddContact />} />
 						<Route path="/demo" element={<Demo />} />
+						<Route path="/home" element={<Home />} />
 						<Route path="/single/:theid" element={<Single />} />
 						<Route path="*" element={<h1>Not found!</h1>} />
 					</Routes>
