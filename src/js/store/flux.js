@@ -26,19 +26,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(data);
 					setStore({contacts: data})})
 			},
-			changeColor: (index, color) => {
-				//get the store
+			fetchDeleteOneContact: (id) => {
+				fetch("https://playground.4geeks.com/apis/fake/contact/" + id, {
+					method: 'DELETE',
+					body: JSON.stringify(id),
+					headers: {'Content-Type': 'application/json'}
+				})
+					.then(response => {
+						if (!response.ok) throw Error(response.statusText);
+						return response;
+					})
+					.then(response => console.log("Successfully Deleted a Contact", response))
+			},
+			deleteContact: (id) => {
 				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
+				let revisedContactList = store.contacts.filter(contact => contact.id !== id);
+				getActions().fetchDeleteOneContact(id);
+				setStore({ contacts: revisedContactList });
 			}
 		}
 	};

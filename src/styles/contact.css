@@ -19,7 +19,6 @@
 }
 
 .contact-image-container {
-    background-color: #FFFFFF;
     width: 210px;
     justify-content: center;
     text-align: center;
@@ -32,7 +31,6 @@
 }
 
 .contact-details {
-    background-color: #FFFFFF;
     width: 600px;
     margin: 10px 0px 0px 50px;
 }
@@ -66,7 +64,6 @@
 }
 
 .contact-modify-container {
-    background-color: #FFFFFF;
     width: 150px;
     margin: 20px 0px 0px 0px;
     display: flex;
