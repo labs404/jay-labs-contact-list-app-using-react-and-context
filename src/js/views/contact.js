@@ -1,5 +1,6 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
 
 const Contact = () => {
     const { store, actions } = useContext(Context);
@@ -9,9 +10,9 @@ const Contact = () => {
             <div className="container-container">
             {store.contacts.map((contact, index) => {
                 return (
-                    <div key={contact.id} className="contact-container">
+                    <div key={contact.id + index} className="contact-container m-2">
                         <div className="contact-image-container">
-                            <img className="contact-image-photo" src="https://xsgames.co/randomusers/avatar.php?g=male" />
+                            <img className="contact-image-photo" src={`https://xsgames.co/randomusers/assets/avatars/male/`+(String(contact.id).slice(0,2))+`.jpg`} />
                         </div>
                         <div className="contact-details">
                             <div className="contact-details-name">
@@ -38,12 +39,18 @@ const Contact = () => {
                         </div>
                         <div className="contact-modify-container">
                             <div className="contact-modify-edit">
-{/* need to make an edit button with functionality here */}
-                                <button className="modify-contact-button" onClick={() => actions.deleteContact(contact.id)}>
+                                <Link to="/editcontact" 
+                                state={{
+                                    fullname: contact.full_name,
+                                    emailaddress: contact.email,
+                                    agendaslug: contact.agenda_slug,
+                                    mailingaddress: contact.address,
+                                    phonenumber: contact.phone,
+                                    id: contact.id}}>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="contact-modify-svg bi bi-pencil-fill" viewBox="0 0 16 16">
                                         <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                                     </svg>
-                                </button>
+                                </Link>
                             </div>
                             <div className="contact-modify-delete">
                                 <button className="modify-contact-button" onClick={() => actions.deleteContact(contact.id)}>
@@ -57,7 +64,6 @@ const Contact = () => {
                 )
             })}
             </div>
-            <button onClick={() => actions.saveContact()}>add a contact</button>
         </>
     );
 };

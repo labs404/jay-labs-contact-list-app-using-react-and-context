@@ -16,15 +16,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
+
 			fetchAllContacts: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
 				fetch("https://playground.4geeks.com/apis/fake/contact/agenda/labs404")
 				.then(response => response.json())
 				.then(data => {
 					setStore({contacts: data})})
 			},
+
+			deleteContact: (id) => {
+				const store = getStore();
+				let revisedContactList = store.contacts.filter(contact => contact.id !== id);
+				getActions().fetchDeleteOneContact(id);
+				setStore({ contacts: revisedContactList });
+			},
+
 			fetchDeleteOneContact: (id) => {
 				fetch("https://playground.4geeks.com/apis/fake/contact/" + id, {
 					method: 'DELETE',
@@ -37,6 +43,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(response => console.log("Successfully Deleted a Contact", response))
 			},
+
 			fetchAddOneContact: (newContact) => {
 				fetch("https://playground.4geeks.com/apis/fake/contact/", {
 					method: 'POST',
@@ -49,35 +56,48 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(response => console.log("Successfully Added a Contact", response))
 			},
-			deleteContact: (id) => {
-				const store = getStore();
-				let revisedContactList = store.contacts.filter(contact => contact.id !== id);
-				getActions().fetchDeleteOneContact(id);
-				setStore({ contacts: revisedContactList });
+
+			saveContact: (fullName, emailAddress, phoneNumber, mailingAddress ) => {
+				fetch("https://playground.4geeks.com/apis/fake/contact/", {
+					method: 'POST',
+					body: JSON.stringify({
+						full_name: fullName,
+						email: emailAddress,
+						agenda_slug: "labs404",
+						address: mailingAddress,
+						phone: phoneNumber
+					}),
+					headers: {'Content-Type': 'application/json'}
+				})
+				.then(response => {
+					if (!response.ok) throw Error(response.statusText);
+					getActions().fetchAllContacts();
+					return response;
+				})
+				.then(() => console.log("Successfully added one contact"))
+				.catch(error => console.error("Error", error))
 			},
-			saveContact: () => {
-				// let newContact = {
-				// 	"full_name": fullName,
-				// 	"email": email,
-				// 	"agenda_slug": "labs404",
-				// 	"address": address,
-				// 	"phone": phone
-				// };
-				let newContact = {
-					full_name: "John Dough",
-					email: "John@Dough.Com",
-					agenda_slug: "labs404",
-					address: "This is an address",
-					phone: "123-456-7890"
-				};
-				getActions().addContact(newContact);
-			},
-			addContact: (newContact) => {
-				const store = getStore();
-				let revisedStore = [...store.contacts, newContact];
-				getActions().fetchAddOneContact(newContact);
-				setStore({ contacts: revisedStore });
-			}
+
+			editContact: (name, email, phone, mail, id) => {
+				fetch("https://playground.4geeks.com/apis/fake/contact/" + id, {
+					method: 'PUT',
+					body: JSON.stringify({
+						full_name: name,
+						email: email,
+						agenda_slug: "labs404",
+						address: mail,
+						phone: phone,
+					}),
+					headers: {'Content-Type': 'application/json'}
+				})
+				.then(response => {
+					if (!response.ok) throw Error(response.statusText);
+					getActions().fetchAllContacts();
+					return response;
+				})
+				.then(() => console.log("Successfully added one contact"))
+				.catch(error => console.error("Error", error))
+			},	
 		}
 	};
 };
