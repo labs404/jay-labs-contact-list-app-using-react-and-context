@@ -16,7 +16,7 @@ const SingleContact = () => {
                 <div className="row">
                     <div className="col-2">&nbsp;</div>
                     <div className="single-contact-container col-8 text-center p-4">
-                        <p><img className="contact-image-photo-large" src={`https://xsgames.co/randomusers/assets/avatars/male/`+(String(id).slice(0,1))+`.jpg`} /></p>
+                        <p><img className="contact-image-photo-large" src={`https://xsgames.co/randomusers/assets/avatars/male/`+(String(id).slice(0,2))+`.jpg`} /></p>
                         <h1>{fullname}</h1>
                         <h4>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="single-contact-details-svg bi bi-envelope-fill" viewBox="0 0 16 16">

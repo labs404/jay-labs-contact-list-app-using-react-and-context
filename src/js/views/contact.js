@@ -9,18 +9,37 @@ const Contact = () => {
 
     return (
         <>
+        {/* {console.log(store.contacts)} */}
+
             <div className="container-container">
             {store.contacts.map((contact, index) => {
+                // return (
+                //     <>
+                //         {console.log("contact \n",contact)}
+                //         {console.log("fullname \n",contact.fullname)}
+                //         {console.log("emailaddress \n",contact.email)}
+                //         {console.log("mailingaddress \n",contact.address)}
+                //         {console.log("phonenumber \n",contact.phone)}
+                //         {console.log("id \n", contact.id)}
+
+                //         <p>full name: {contact.fullname}</p>
+                //         <p>email: {contact.email}</p>
+                //         <p>street address: {contact.address}</p>
+                //         <p>phone number: {contact.phone}</p>
+                //         <p>id: {contact.id}</p>
+                //     </>
+                // )
+
                 return (
+
                     <div key={contact.id + index} className="contact-container m-2">
                         <div className="contact-image-container">
                             <Link 
                                 to="/singlecontact" 
                                 className="covertLinks"
                                 state={{
-                                    fullname: contact.full_name,
+                                    fullname: contact.fullname,
                                     emailaddress: contact.email,
-                                    agendaslug: contact.agenda_slug,
                                     mailingaddress: contact.address,
                                     phonenumber: contact.phone,
                                     id: contact.id
@@ -34,16 +53,15 @@ const Contact = () => {
                                 to="/singlecontact" 
                                 className="covertLinks"
                                 state={{
-                                    fullname: contact.full_name,
+                                    fullname: contact.fullname,
                                     emailaddress: contact.email,
-                                    agendaslug: contact.agenda_slug,
                                     mailingaddress: contact.address,
                                     phonenumber: contact.phone,
                                     id: contact.id
                                 }}
                             >
                                 <div className="contact-details-name">
-                                    {contact.full_name}
+                                    {contact.fullname}
                                 </div>
                                 <div className="contact-details-address">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="contact-details-svg bi bi-geo-alt-fill" viewBox="0 0 16 16">
@@ -70,9 +88,8 @@ const Contact = () => {
                             <div className="contact-modify-edit">
                                 <Link to="/editcontact" 
                                 state={{
-                                    fullname: contact.full_name,
+                                    fullname: contact.fullname,
                                     emailaddress: contact.email,
-                                    agendaslug: contact.agenda_slug,
                                     mailingaddress: contact.address,
                                     phonenumber: contact.phone,
                                     id: contact.id}}>
@@ -90,7 +107,10 @@ const Contact = () => {
                             </div>
                         </div>
                     </div>
+
                 )
+
+
             })}
             </div>
         </>

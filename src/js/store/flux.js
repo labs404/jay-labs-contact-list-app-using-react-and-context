@@ -3,11 +3,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			contacts: [
 				{
-					"full_name": "Dave Bradley",
+					"fullname": "Dave Bradley",
 					"email": "dave@gmail.com",
-					"agenda_slug": "my_super_agenda",
 					"address":"47568 NW 34ST, 33434 FL, USA",
-					"phone":"7864445566"
+					"phone":"7864445566",
+					"id": "akjshdfaljhsdf"
+				},
+				{
+					"fullname": "Name Placeholder Zero",
+					"email": "zero@zero.com",
+					"address":"Zero City, Zero State, Zero Country",
+					"phone":"000-000-0000",
+					"id": "qiwuehqkjbsdfvwer"
+				},
+				{
+					"fullname": "Name Placeholder One",
+					"email": "one@one.com",
+					"address":"One City, One State, One Country",
+					"phone":"111-111-1111",
+					"id": ",zMnxcvawsdfgcsxhjbaqwe"
+				},
+				{
+					"fullname": "Name Placeholder Two",
+					"email": "two@two.com",
+					"address":"Two City, Two State, Two Country",
+					"phone":"222-222-2222",
+					"id": "aosidhiu32b51q87f"
 				}
 			]
 		},
@@ -18,10 +39,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			fetchAllContacts: () => {
-				fetch("https://playground.4geeks.com/apis/fake/contact/agenda/labs404")
+				fetch("https://playground.4geeks.com/contact/agendas/labs404")
 				.then(response => response.json())
 				.then(data => {
-					setStore({contacts: data})})
+					setStore({contacts: data.contacts})})
 			},
 
 			deleteContact: (id) => {
@@ -32,7 +53,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			fetchDeleteOneContact: (id) => {
-				fetch("https://playground.4geeks.com/apis/fake/contact/" + id, {
+				fetch("https://playground.4geeks.com/contact/agendas/labs404/contacts/"+id, {
 					method: 'DELETE',
 					body: JSON.stringify(id),
 					headers: {'Content-Type': 'application/json'}
@@ -45,7 +66,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			fetchAddOneContact: (newContact) => {
-				fetch("https://playground.4geeks.com/apis/fake/contact/", {
+				fetch("https://playground.4geeks.com/contact/agendas/", {
 					method: 'POST',
 					body: JSON.stringify(newContact),
 					headers: {'Content-Type': 'application/json'}
@@ -58,12 +79,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			saveContact: (fullName, emailAddress, phoneNumber, mailingAddress ) => {
-				fetch("https://playground.4geeks.com/apis/fake/contact/", {
-					method: 'POST',
+				fetch("https://playground.4geeks.com/contact/agendas/labs404/contacts", {
+				    method: 'POST',
 					body: JSON.stringify({
-						full_name: fullName,
+						name: fullName,
 						email: emailAddress,
-						agenda_slug: "labs404",
 						address: mailingAddress,
 						phone: phoneNumber
 					}),
@@ -79,12 +99,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			editContact: (name, email, phone, mail, id) => {
-				fetch("https://playground.4geeks.com/apis/fake/contact/" + id, {
+				fetch("https://playground.4geeks.com/contact/agendas/labs404/contacts/"+id, {
 					method: 'PUT',
 					body: JSON.stringify({
-						full_name: name,
+						name: name,
 						email: email,
-						agenda_slug: "labs404",
 						address: mail,
 						phone: phone,
 					}),
