@@ -9,29 +9,9 @@ const Contact = () => {
 
     return (
         <>
-        {console.log(store.contacts)}
-
             <div className="container-container">
             {store.contacts.map((contact, index) => {
-                // return (
-                //     <>
-                //         {console.log("contact \n",contact)}
-                //         {console.log("fullname \n",contact.name)}
-                //         {console.log("emailaddress \n",contact.email)}
-                //         {console.log("mailingaddress \n",contact.address)}
-                //         {console.log("phonenumber \n",contact.phone)}
-                //         {console.log("id \n", contact.id)}
-
-                //         <p>full name: {contact.name}</p>
-                //         <p>email: {contact.email}</p>
-                //         <p>street address: {contact.address}</p>
-                //         <p>phone number: {contact.phone}</p>
-                //         <p>id: {contact.id}</p>
-                //     </>
-                // )
-
                 return (
-
                     <div key={contact.id + index} className="contact-container m-2">
                         <div className="contact-image-container">
                             <Link 
@@ -107,10 +87,7 @@ const Contact = () => {
                             </div>
                         </div>
                     </div>
-
                 )
-
-
             })}
             </div>
         </>

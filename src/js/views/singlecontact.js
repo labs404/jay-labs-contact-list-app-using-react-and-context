@@ -5,7 +5,7 @@ import "../../styles/singlecontact.css";
 
 const SingleContact = () => {
     const location = useLocation();
-    const {fullname, emailaddress, phonenumber, mailingaddress, id, agendaslug} = location.state;
+    const {fullname, emailaddress, phonenumber, mailingaddress, id} = location.state;
 
     return (
         <>
@@ -45,7 +45,6 @@ const SingleContact = () => {
                         state={{
                             fullname: fullname,
                             emailaddress: emailaddress,
-                            agendaslug: agendaslug,
                             mailingaddress: mailingaddress,
                             phonenumber: phonenumber,
                             id: id
