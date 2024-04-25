@@ -9,20 +9,20 @@ const Contact = () => {
 
     return (
         <>
-        {/* {console.log(store.contacts)} */}
+        {console.log(store.contacts)}
 
             <div className="container-container">
             {store.contacts.map((contact, index) => {
                 // return (
                 //     <>
                 //         {console.log("contact \n",contact)}
-                //         {console.log("fullname \n",contact.fullname)}
+                //         {console.log("fullname \n",contact.name)}
                 //         {console.log("emailaddress \n",contact.email)}
                 //         {console.log("mailingaddress \n",contact.address)}
                 //         {console.log("phonenumber \n",contact.phone)}
                 //         {console.log("id \n", contact.id)}
 
-                //         <p>full name: {contact.fullname}</p>
+                //         <p>full name: {contact.name}</p>
                 //         <p>email: {contact.email}</p>
                 //         <p>street address: {contact.address}</p>
                 //         <p>phone number: {contact.phone}</p>
@@ -38,7 +38,7 @@ const Contact = () => {
                                 to="/singlecontact" 
                                 className="covertLinks"
                                 state={{
-                                    fullname: contact.fullname,
+                                    fullname: contact.name,
                                     emailaddress: contact.email,
                                     mailingaddress: contact.address,
                                     phonenumber: contact.phone,
@@ -53,7 +53,7 @@ const Contact = () => {
                                 to="/singlecontact" 
                                 className="covertLinks"
                                 state={{
-                                    fullname: contact.fullname,
+                                    fullname: contact.name,
                                     emailaddress: contact.email,
                                     mailingaddress: contact.address,
                                     phonenumber: contact.phone,
@@ -61,7 +61,7 @@ const Contact = () => {
                                 }}
                             >
                                 <div className="contact-details-name">
-                                    {contact.fullname}
+                                    {contact.name}
                                 </div>
                                 <div className="contact-details-address">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="contact-details-svg bi bi-geo-alt-fill" viewBox="0 0 16 16">
@@ -88,7 +88,7 @@ const Contact = () => {
                             <div className="contact-modify-edit">
                                 <Link to="/editcontact" 
                                 state={{
-                                    fullname: contact.fullname,
+                                    fullname: contact.name,
                                     emailaddress: contact.email,
                                     mailingaddress: contact.address,
                                     phonenumber: contact.phone,
