@@ -20,7 +20,7 @@ const EditContact = () => {
                 <div className="row">
                     <div className="col-2">&nbsp;</div>
                     <div className="col-8 text-center mb-4 mt-3">
-                        <h1 className="editContactH1">Enter New Contact Details Below</h1>
+                        <h1 className="editContactH1">Edit Existing Contact Details Below</h1>
                     </div>
                     <div className="col-2">&nbsp;</div>
                 </div>
