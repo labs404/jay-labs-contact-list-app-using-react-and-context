@@ -3,46 +3,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			contacts: [
 				{
-					"fullname": "Dave Bradley",
-					"email": "dave@gmail.com",
-					"address":"47568 NW 34ST, 33434 FL, USA",
-					"phone":"7864445566",
+					"name": "This is a placeholder contact.",
+					"email": "This contact will automatically be deleted.",
+					"address":"We have created a new agenda for you.",
+					"phone":"Please add a new contact to continue.",
 					"id": "345634553683578453455"
-				},
-				{
-					"fullname": "Name Placeholder Zero",
-					"email": "zero@zero.com",
-					"address":"Zero City, Zero State, Zero Country",
-					"phone":"000-000-0000",
-					"id": "543456345674566268468"
-				},
-				{
-					"fullname": "Name Placeholder One",
-					"email": "one@one.com",
-					"address":"One City, One State, One Country",
-					"phone":"111-111-1111",
-					"id": "345245783456623435855"
-				},
-				{
-					"fullname": "Name Placeholder Two",
-					"email": "two@two.com",
-					"address":"Two City, Two State, Two Country",
-					"phone":"222-222-2222",
-					"id": "678536452385634563333"
 				}
 			]
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
 
 			fetchAllContacts: () => {
 				fetch("https://playground.4geeks.com/contact/agendas/labs404")
-				.then(response => response.json())
-				.then(data => {
-					setStore({contacts: data.contacts})})
+					.then(response => {
+						if (!response.ok) {
+							getActions().createAgenda();
+						}
+						else {
+							return response.json()
+						};
+					})
+					.then(data => {
+						setStore({contacts: data.contacts})})
 			},
 
 			deleteContact: (id) => {
@@ -116,7 +98,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				.then(() => console.log("Successfully added one contact"))
 				.catch(error => console.error("Error", error))
-			},	
+			},
+			
+			createAgenda: () => {
+				console.log("creating a new agenda");
+				fetch("https://playground.4geeks.com/contact/agendas/labs404", {
+					method: 'POST',
+				})
+			},
+
 		}
 	};
 };
