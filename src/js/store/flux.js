@@ -101,7 +101,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			
 			createAgenda: () => {
-				console.log("creating a new agenda");
+				console.log("No such Agenda found! \n Creating a new agenda and displaying a placeholder contact.");
 				fetch("https://playground.4geeks.com/contact/agendas/labs404", {
 					method: 'POST',
 				})
