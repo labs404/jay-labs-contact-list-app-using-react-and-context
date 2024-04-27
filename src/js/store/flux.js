@@ -4,9 +4,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			contacts: [
 				{
 					"name": "This is a placeholder contact.",
-					"email": "This contact will automatically be deleted.",
 					"address":"We have created a new agenda for you.",
 					"phone":"Please add a new contact to continue.",
+					"email": "This contact will automatically be deleted.",
 					"id": "345634553683578453455"
 				}
 			]
@@ -47,19 +47,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(response => console.log("Successfully Deleted a Contact", response))
 			},
 
-			fetchAddOneContact: (newContact) => {
-				fetch("https://playground.4geeks.com/contact/agendas/", {
-					method: 'POST',
-					body: JSON.stringify(newContact),
-					headers: {'Content-Type': 'application/json'}
-				})
-					.then(response => {
-						if (!response.ok) throw Error(response.statusText);
-						return response;
-					})
-					.then(response => console.log("Successfully Added a Contact", response))
-			},
-
 			saveContact: (fullName, emailAddress, phoneNumber, mailingAddress ) => {
 				fetch("https://playground.4geeks.com/contact/agendas/labs404/contacts", {
 				    method: 'POST',
@@ -71,13 +58,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}),
 					headers: {'Content-Type': 'application/json'}
 				})
-				.then(response => {
-					if (!response.ok) throw Error(response.statusText);
-					getActions().fetchAllContacts();
-					return response;
-				})
-				.then(() => console.log("Successfully added one contact"))
-				.catch(error => console.error("Error", error))
+					.then(response => {
+						if (!response.ok) throw Error(response.statusText);
+						getActions().fetchAllContacts();
+						return response;
+					})
+					.then(() => console.log("Successfully added one contact"))
+					.catch(error => console.error("Error", error))
 			},
 
 			editContact: (name, email, phone, mail, id) => {
@@ -91,22 +78,51 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}),
 					headers: {'Content-Type': 'application/json'}
 				})
-				.then(response => {
-					if (!response.ok) throw Error(response.statusText);
-					getActions().fetchAllContacts();
-					return response;
-				})
-				.then(() => console.log("Successfully added one contact"))
-				.catch(error => console.error("Error", error))
+					.then(response => {
+						if (!response.ok) throw Error(response.statusText);
+						getActions().fetchAllContacts();
+						return response;
+					})
+					.then(() => console.log("Successfully added one contact"))
+					.catch(error => console.error("Error", error))
 			},
 			
 			createAgenda: () => {
-				console.log("No such Agenda found! \n Creating a new agenda and displaying a placeholder contact.");
+				console.log("No such Agenda found! \n...Creating a new agenda.");
 				fetch("https://playground.4geeks.com/contact/agendas/labs404", {
 					method: 'POST',
 				})
+					.then(response => {
+						if (!response.ok) throw Error(response.statusText);
+						return response;
+					})
+					.then(() => {
+						console.log("Successfully created an agenda! \n...Generating placeholder contact.");
+						getActions().generatePlaceholderContact();
+					
+					})
+					.catch(error => console.error("Error", error))
 			},
 
+			generatePlaceholderContact: () => {
+				fetch("https://playground.4geeks.com/contact/agendas/labs404/contacts", {
+				    method: 'POST',
+					body: JSON.stringify({
+						"name": "Hi there! I'm your first contact!",
+						"address":"Please add more contacts to continue.",
+						"phone":"Feel free to delete or update me at any time!",
+						"email": "Thanks for using Jay's Contact List"
+					}),
+					headers: {'Content-Type': 'application/json'}
+				})
+					.then(response => {
+						if (!response.ok) throw Error(response.statusText);
+						getActions().fetchAllContacts();
+						return response;
+					})
+					.then(() => console.log("Successfully generated one placeholder contact!"))
+					.catch(error => console.error("Error", error))
+			}
 		}
 	};
 };

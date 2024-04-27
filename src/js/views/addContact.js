@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
+import "../../styles/addContact.css";
+
 
 const AddContact = ({ saveContact }) => {
     const { store, actions } = useContext(Context);
@@ -14,14 +16,14 @@ const AddContact = ({ saveContact }) => {
             <div className="addContactContainer">
                 <div className="row">
                     <div className="col-2">&nbsp;</div>
-                    <div className="col-8 text-center mb-4">
-                        <h1>Enter New Contact Details Below</h1>
+                    <div className="col-8 text-center mb-4 mt-3">
+                        <h1 className="addContactH1">Enter New Contact Details Below</h1>
                     </div>
                     <div className="col-2">&nbsp;</div>
                 </div>
                 <div className="row">
                     <div className="col-3">&nbsp;</div>
-                    <div className="col-6 border border-dark border-3 px-5 pt-3 pb-4 text-start">
+                    <div className="addContactCard col-6 px-5 pt-3 pb-4 text-start">
                         <h2>Full Name</h2>
                         <input
                             type="text"

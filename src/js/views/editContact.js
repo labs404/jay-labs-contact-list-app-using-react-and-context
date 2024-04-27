@@ -2,10 +2,11 @@ import React, { useContext, useState } from "react";
 import { useLocation } from 'react-router-dom'
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
+import "../../styles/editContact.css";
 
-const EditContact = (props) => {
+const EditContact = () => {
     const location = useLocation();
-    const { fullname, emailaddress, phonenumber, mailingaddress, id, agendaslug} = location.state;
+    const { fullname, emailaddress, phonenumber, mailingaddress, id} = location.state;
 
     const { store, actions } = useContext(Context);
     const [editFullName, setEditFullName] = useState(fullname);
@@ -18,14 +19,14 @@ const EditContact = (props) => {
             <div className="addContactContainer">
                 <div className="row">
                     <div className="col-2">&nbsp;</div>
-                    <div className="col-8 text-center mb-4">
-                        <h1>Enter New Contact Details Below</h1>
+                    <div className="col-8 text-center mb-4 mt-3">
+                        <h1 className="editContactH1">Enter New Contact Details Below</h1>
                     </div>
                     <div className="col-2">&nbsp;</div>
                 </div>
                 <div className="row">
                     <div className="col-3">&nbsp;</div>
-                    <div className="col-6 border border-dark border-3 px-5 pt-3 pb-4 text-start">
+                    <div className="editContactCard col-6 px-5 pt-3 pb-4 text-start">
                         <h2>Full Name</h2>
                         <input
                             type="text"
@@ -65,7 +66,7 @@ const EditContact = (props) => {
                     <div className="col-3">&nbsp;</div>
                     <div className="col-6 text-center mt-4">
                         <Link to="/">
-                            <button className="btn btn-danger btn-lg m-1" id="saveButton" onClick={() => actions.editContact(editFullName, editEmailAddress, editPhoneNumber, editMailingAddress, id)}>Save</button>
+                            <button className="btn btn-danger btn-lg m-1" id="saveButton" onClick={() => actions.editContact(editFullName, editEmailAddress, editPhoneNumber, editMailingAddress, id)}>Update Contact</button>
                         </Link>
                         <Link to="/">
                             <button className="btn btn-primary btn-lg m-1">Go to back to Contacts</button>

@@ -6,3 +6,26 @@ body {
     background-color: #333333;
     color: #990000;
 }
+
+a:link, a:visited, a:active {
+    text-decoration: none;
+    color: #CC0000;
+}
+  
+a:hover {
+    text-decoration: none;
+    color: #FF0000;
+
+}
+  
+/* a:active {
+    text-decoration: none;
+    color: #CC0000;
+
+}
+
+a:visited {
+    text-decoration: none;
+    color: #CC0000;
+
+} */
